@@ -6,13 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, Check } from "lucide-react";
 import { generateKoreanNameOptions } from "@/lib/korean-name-generator";
 
+type NameOption = {
+  id: string;
+  type: string;
+  koreanName: string;
+  meaning: string;
+  description: string;
+};
+
 export default function OptionsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
   const keyword = searchParams.get("keyword") || "";
   
-  const [options, setOptions] = useState<ReturnType<typeof generateKoreanNameOptions>>([]);
+  const [options, setOptions] = useState<NameOption[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
