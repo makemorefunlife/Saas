@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Check } from "lucide-react";
@@ -14,7 +14,7 @@ type NameOption = {
   description: string;
 };
 
-export default function OptionsPage() {
+function OptionsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
@@ -136,6 +136,31 @@ export default function OptionsPage() {
         </Button>
       </div>
     </main>
+  );
+}
+
+export default function OptionsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4">
+        <div className="text-center space-y-6">
+          <div className="relative">
+            <Sparkles className="w-16 h-16 text-pink-400 mx-auto animate-pulse" />
+            <div className="absolute inset-0 bg-pink-400/20 rounded-full blur-xl animate-pulse" />
+          </div>
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              Carving your destiny...
+            </h2>
+            <p className="text-white/70">
+              AI is creating your Korean name options
+            </p>
+          </div>
+        </div>
+      </main>
+    }>
+      <OptionsContent />
+    </Suspense>
   );
 }
 

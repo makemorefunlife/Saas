@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Download, Share2, Palette, Sticker, Image as ImageIcon } from "lucide-react";
@@ -39,9 +40,8 @@ const getDesignTypeInfo = (designType: string) => {
   return types[designType] || types.tattoo;
 };
 
-export default function ResultPage() {
+function ResultContent() {
   const searchParams = useSearchParams();
-  const name = searchParams.get("name") || "";
   const koreanName = searchParams.get("koreanName") || "";
   const meaning = searchParams.get("meaning") || "";
   const type = searchParams.get("type") || "";
@@ -99,6 +99,20 @@ export default function ResultPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="animate-pulse text-white">Loading...</div>
+        </div>
+      </main>
+    }>
+      <ResultContent />
+    </Suspense>
   );
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Palette, Sticker, Image as ImageIcon, ArrowRight } from "lucide-react";
@@ -32,7 +32,7 @@ const DESIGN_TYPES = [
   },
 ];
 
-export default function DesignTypePage() {
+function DesignTypeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
@@ -123,6 +123,20 @@ export default function DesignTypePage() {
         </Button>
       </div>
     </main>
+  );
+}
+
+export default function DesignTypePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="animate-pulse text-white">Loading...</div>
+        </div>
+      </main>
+    }>
+      <DesignTypeContent />
+    </Suspense>
   );
 }
 

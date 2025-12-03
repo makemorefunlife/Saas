@@ -154,8 +154,6 @@ function generatePureKoreanName(name: string, keyword: string): {
   meaning: string;
   description: string;
 } {
-  const keywordData = KEYWORD_MEANINGS[keyword] || KEYWORD_MEANINGS.elegant;
-  
   const pureNames: Record<string, string[]> = {
     elegant: ['아름', '예쁜', '고운', '맑은', '밝은'],
     strong: ['강한', '튼튼', '굳은', '단단', '힘찬'],
@@ -219,10 +217,7 @@ export function generateKoreanNameOptions(name: string, keyword: string): Array<
   meaning: string;
   description: string;
 }> {
-  // 이름과 키워드를 기반으로 고유한 옵션 생성
-  const seed = name.toLowerCase().split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + keyword.length;
-  
-  // 시드 기반으로 다양한 옵션 생성
+  // 이름과 키워드를 기반으로 다양한 옵션 생성
   const options = [
     {
       id: 'a',
