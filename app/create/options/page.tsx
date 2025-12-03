@@ -61,7 +61,10 @@ export default function OptionsPage() {
 
   const handleContinue = () => {
     if (selectedOption) {
-      router.push(`/create/result?name=${encodeURIComponent(name)}&option=${selectedOption}`);
+      const selectedName = options.find((opt) => opt.id === selectedOption)?.koreanName || "";
+      router.push(
+        `/create/design-type?name=${encodeURIComponent(name)}&option=${selectedOption}&koreanName=${encodeURIComponent(selectedName)}`
+      );
     }
   };
 
