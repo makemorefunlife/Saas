@@ -234,4 +234,88 @@ const params = await props.params
 const searchParams = await props.searchParams
 ```
 
+## Critical Build Requirements (Next.js 15)
+
+### useSearchParams() Suspense Boundary
+
+**MUST wrap `useSearchParams()` with Suspense boundary** to prevent build errors:
+
+```typescript
+// ❌ DON'T: Direct use of useSearchParams() in page component
+"use client";
+import { useSearchParams } from "next/navigation";
+
+export default function Page() {
+  const searchParams = useSearchParams(); // ERROR: Missing Suspense boundary
+  // ...
+}
+
+// ✅ DO: Wrap with Suspense
+"use client";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+
+function PageContent() {
+  const searchParams = useSearchParams();
+  // ... component logic
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PageContent />
+    </Suspense>
+  );
+}
+```
+
+**Rule**: Whenever using `useSearchParams()` in a page component, create a separate content component and wrap it with Suspense in the default export.
+
+### TypeScript Type Definitions
+
+**Prefer explicit type definitions over `ReturnType<typeof function>`** for better build reliability:
+
+```typescript
+// ❌ DON'T: Using ReturnType can cause build errors
+const [options, setOptions] = useState<ReturnType<typeof generateOptions>>([]);
+
+// ✅ DO: Use explicit type definition
+type Option = {
+  id: string;
+  type: string;
+  koreanName: string;
+  meaning: string;
+  description: string;
+};
+
+const [options, setOptions] = useState<Option[]>([]);
+```
+
+**Rule**: Define explicit types for useState, especially when the type comes from a function return type.
+
+### Unused Variables
+
+**Remove all unused variables** to prevent linting warnings and build issues:
+
+```typescript
+// ❌ DON'T: Keep unused variables
+const name = searchParams.get("name") || ""; // Never used
+const seed = calculateSeed(); // Never used
+
+// ✅ DO: Remove unused variables
+const koreanName = searchParams.get("koreanName") || ""; // Actually used
+```
+
+**Rule**: Before committing, ensure all declared variables are used. Use ESLint to catch unused variables automatically.
+
+### Build Validation Checklist
+
+Before committing code, verify:
+
+1. ✅ All `useSearchParams()` calls are wrapped in Suspense
+2. ✅ All useState types are explicitly defined (not using ReturnType)
+3. ✅ No unused variables remain in the code
+4. ✅ `pnpm run build` completes successfully without errors
+5. ✅ Type checking passes (`pnpm run build` includes type checking)
+
 <!-- https://github.com/PatrickJS/awesome-cursorrules/blob/main/rules/nextjs15-react19-vercelai-tailwind-cursorrules-prompt-file/.cursorrules -->
