@@ -12,7 +12,7 @@ export default function OptionsPage() {
   const name = searchParams.get("name") || "";
   const keyword = searchParams.get("keyword") || "";
   
-  const [options, setOptions] = useState<ReturnType<typeof generateOptions>>([]);
+  const [options, setOptions] = useState<ReturnType<typeof generateKoreanNameOptions>>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
