@@ -56,13 +56,15 @@ export default function Home() {
         </div>
 
         {/* 예시 */}
-        <div className="mt-8 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm w-full">
-          <p className="text-sm text-white/70 mb-3">Example:</p>
-          <div className="flex items-center justify-center gap-3 text-lg">
+        <div className="p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm w-full">
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-white/70">Example:</p>
+            <div className="flex items-center justify-center gap-3 text-lg">
             <span className="text-white/60">Marchella</span>
             <span className="text-white/40">→</span>
             <span className="font-bold text-pink-400">채원</span>
             <span className="text-white/60 text-sm">(Elegant & Refined)</span>
+          </div>
           </div>
         </div>
       </section>

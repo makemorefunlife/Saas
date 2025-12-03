@@ -40,16 +40,19 @@ export default function CreatePage() {
   return (
     <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Create Your Korean Name
-          </h1>
-          <p className="text-white/70">
-            Enter your name and choose a keyword that represents you
-          </p>
-        </div>
+        <div className="flex flex-col gap-8">
+          <div className="text-center">
+            <div className="flex flex-col gap-3">
+              <h1 className="text-3xl md:text-4xl font-bold text-white">
+                Create Your Korean Name
+              </h1>
+              <p className="text-white/70">
+                Enter your name and choose a keyword that represents you
+              </p>
+            </div>
+          </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {/* 이름 입력 */}
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-white/90">
@@ -83,9 +86,11 @@ export default function CreatePage() {
                       : "border-white/20 bg-white/5 hover:border-white/40 hover:bg-white/10"
                   }`}
                 >
-                  <div className="text-2xl mb-1">{keyword.emoji}</div>
-                  <div className="text-sm font-medium text-white">
-                    {keyword.label}
+                  <div className="flex flex-col gap-1">
+                    <div className="text-2xl">{keyword.emoji}</div>
+                    <div className="text-sm font-medium text-white">
+                      {keyword.label}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -110,8 +115,9 @@ export default function CreatePage() {
                 <ArrowRight className="w-5 h-5" />
               </>
             )}
-          </Button>
-        </form>
+            </Button>
+          </form>
+        </div>
       </div>
     </main>
   );

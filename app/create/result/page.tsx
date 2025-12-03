@@ -54,48 +54,54 @@ function ResultContent() {
   return (
     <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-2xl mx-auto text-center">
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Your Korean Name Design
-          </h1>
-          
-          {/* 디자인 타입 표시 */}
-          <div className="mb-4 flex items-center justify-center gap-2 text-pink-400">
-            <DesignIcon className="w-5 h-5" />
-            <span className="text-sm font-medium">{designInfo.name}</span>
-          </div>
-
-          <div className="bg-white/5 border border-white/20 rounded-lg p-8 backdrop-blur-sm">
-            <div className="text-6xl md:text-7xl font-bold text-white mb-4">
-              {result.koreanName}
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-white">
+              Your Korean Name Design
+            </h1>
+            
+            {/* 디자인 타입 표시 */}
+            <div className="flex items-center justify-center gap-2 text-pink-400">
+              <DesignIcon className="w-5 h-5" />
+              <span className="text-sm font-medium">{designInfo.name}</span>
             </div>
-            <p className="text-xl text-white/90 mb-2">{result.meaning}</p>
-            <p className="text-sm text-white/60 mb-4">{result.type}</p>
-            <p className="text-xs text-white/50 italic">{designInfo.description}</p>
+
+            <div className="bg-white/5 border border-white/20 rounded-lg p-8 backdrop-blur-sm">
+              <div className="flex flex-col gap-4">
+                <div className="text-6xl md:text-7xl font-bold text-white">
+                  {result.koreanName}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-xl text-white/90">{result.meaning}</p>
+                  <p className="text-sm text-white/60">{result.type}</p>
+                  <p className="text-xs text-white/50 italic">{designInfo.description}</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="space-y-4">
-          <Button
-            size="lg"
-            className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:from-pink-600 hover:via-purple-600 hover:to-pink-600 text-white border-0 shadow-lg shadow-pink-500/50"
-          >
-            <Download className="w-5 h-5" />
-            Download {designInfo.name}
-          </Button>
-          
-          <Button
-            size="lg"
-            variant="outline"
-            className="w-full h-14 text-lg font-semibold border-white/20 bg-white/5 hover:bg-white/10 text-white"
-          >
-            <Share2 className="w-5 h-5" />
-            Share on Instagram
-          </Button>
-        </div>
+          <div className="flex flex-col gap-4">
+            <Button
+              size="lg"
+              className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:from-pink-600 hover:via-purple-600 hover:to-pink-600 text-white border-0 shadow-lg shadow-pink-500/50"
+            >
+              <Download className="w-5 h-5" />
+              Download {designInfo.name}
+            </Button>
+            
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full h-14 text-lg font-semibold border-white/20 bg-white/5 hover:bg-white/10 text-white"
+            >
+              <Share2 className="w-5 h-5" />
+              Share on Instagram
+            </Button>
+          </div>
 
-        <div className="mt-8 text-sm text-white/60">
-          <p>#{result.koreanName} #MyKoreanName #{designType}</p>
+          <div className="text-sm text-white/60">
+            <p>#{result.koreanName} #MyKoreanName #{designType}</p>
+          </div>
         </div>
       </div>
     </main>

@@ -58,25 +58,30 @@ function DesignTypeContent() {
   return (
     <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-            Choose Your Design Style
-          </h1>
-          <p className="text-white/70">
-            Select how you want to display your Korean name
-          </p>
-        </div>
-
-        {/* 선택한 이름 미리보기 */}
-        {koreanName && (
-          <div className="mb-6 p-4 rounded-lg bg-white/5 border border-white/10 text-center">
-            <p className="text-sm text-white/60 mb-1">Your Korean Name</p>
-            <p className="text-2xl font-bold text-white">{koreanName}</p>
+        <div className="flex flex-col gap-8">
+          <div className="text-center">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-white">
+                Choose Your Design Style
+              </h1>
+              <p className="text-white/70">
+                Select how you want to display your Korean name
+              </p>
+            </div>
           </div>
-        )}
 
-        {/* 디자인 타입 선택 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {/* 선택한 이름 미리보기 */}
+          {koreanName && (
+            <div className="p-4 rounded-lg bg-white/5 border border-white/10 text-center">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm text-white/60">Your Korean Name</p>
+                <p className="text-2xl font-bold text-white">{koreanName}</p>
+              </div>
+            </div>
+          )}
+
+          {/* 디자인 타입 선택 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {DESIGN_TYPES.map((type) => {
             const Icon = type.icon;
             return (
@@ -92,27 +97,25 @@ function DesignTypeContent() {
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="text-4xl">{type.emoji}</div>
                   <Icon className="w-8 h-8 text-pink-400" />
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-lg font-semibold text-white">
                       {type.name}
                     </h3>
                     <p className="text-sm text-white/70">{type.description}</p>
                   </div>
                   {selectedType === type.id && (
-                    <div className="mt-2">
-                      <div className="w-6 h-6 rounded-full bg-pink-400 flex items-center justify-center">
-                        <Sparkles className="w-4 h-4 text-white" />
-                      </div>
+                    <div className="w-6 h-6 rounded-full bg-pink-400 flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-white" />
                     </div>
                   )}
                 </div>
               </button>
             );
           })}
-        </div>
+          </div>
 
-        {/* Continue 버튼 */}
-        <Button
+          {/* Continue 버튼 */}
+          <Button
           onClick={handleContinue}
           disabled={!selectedType}
           size="lg"
@@ -120,7 +123,8 @@ function DesignTypeContent() {
         >
           Continue with Selected Design
           <ArrowRight className="w-5 h-5" />
-        </Button>
+          </Button>
+        </div>
       </div>
     </main>
   );
