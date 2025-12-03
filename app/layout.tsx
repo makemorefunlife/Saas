@@ -22,8 +22,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SaaS 템플릿",
-  description: "Next.js + Clerk + Supabase 보일러플레이트",
+  title: "My Korean Name - Get Your Korean Name Destiny",
+  description: "AI-powered Korean name generator for foreigners. Get your personalized Korean name with meaning and beautiful designs in 1 minute.",
 };
 
 export default function RootLayout({
@@ -40,7 +40,7 @@ export default function RootLayout({
         - 참고: Clerk Account Portal은 여전히 영어로 표시됩니다
         @see https://clerk.com/docs/guides/customizing-clerk/localization
       */}
-      <html lang="ko">
+      <html lang="en" className="dark">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >

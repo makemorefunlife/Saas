@@ -1,48 +1,69 @@
-import Link from "next/link";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { RiSupabaseFill } from "react-icons/ri";
+import { Sparkles, Zap, Share2 } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-[calc(100vh-80px)] flex items-center px-8 py-16 lg:py-24">
-      <section className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start lg:items-center">
-        {/* 좌측: 환영 메시지 */}
-        <div className="flex flex-col gap-8">
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-            SaaS 앱 템플릿에 오신 것을 환영합니다
+    <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-8 md:py-16">
+      <section className="w-full max-w-2xl mx-auto flex flex-col gap-12 items-center text-center">
+        {/* 메인 헤드라인 */}
+        <div className="flex flex-col gap-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
+            Get Your
+            <span className="block bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Korean Name Destiny
+            </span>
           </h1>
-          <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Next.js, Shadcn, Clerk, Supabase, TailwindCSS로 구동되는 완전한
-            기능의 템플릿으로 다음 프로젝트를 시작하세요.
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-xl mx-auto">
+            AI-powered Korean name generator. Get your personalized name with meaning and beautiful designs in 1 minute.
           </p>
         </div>
 
-        {/* 우측: 버튼 세 개 세로 정렬 */}
-        <div className="flex flex-col gap-6">
-          <Link href="/instruments" className="w-full">
-            <Button className="w-full h-28 flex items-center justify-center gap-4 text-xl shadow-lg hover:shadow-xl transition-shadow">
-              <RiSupabaseFill className="w-8 h-8" />
-              <span>Supabase 공식 문서 예제</span>
-            </Button>
-          </Link>
-          <Link href="/storage-test" className="w-full">
-            <Button
-              className="w-full h-28 flex items-center justify-center gap-4 text-xl shadow-lg hover:shadow-xl transition-shadow"
-              variant="outline"
+        {/* 가치 제안 (3가지) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm">
+            <Zap className="w-8 h-8 text-pink-400" />
+            <h3 className="font-semibold text-white">Fast</h3>
+            <p className="text-sm text-white/70">1 minute to get your name</p>
+          </div>
+          <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm">
+            <Sparkles className="w-8 h-8 text-purple-400" />
+            <h3 className="font-semibold text-white">Meaningful</h3>
+            <p className="text-sm text-white/70">Not just letters, but destiny</p>
+          </div>
+          <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm">
+            <Share2 className="w-8 h-8 text-pink-400" />
+            <h3 className="font-semibold text-white">Shareable</h3>
+            <p className="text-sm text-white/70">Instagram-ready designs</p>
+          </div>
+        </div>
+
+        {/* CTA 버튼 */}
+        <div className="flex flex-col gap-4 w-full max-w-md">
+          <Link href="/create" className="w-full">
+            <Button 
+              size="lg" 
+              className="w-full h-16 text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:from-pink-600 hover:via-purple-600 hover:to-pink-600 text-white border-0 shadow-lg shadow-pink-500/50 hover:shadow-xl hover:shadow-pink-500/60 transition-all"
             >
-              <RiSupabaseFill className="w-8 h-8" />
-              <span>Storage 파일 업로드 테스트</span>
+              Start Your Journey →
             </Button>
           </Link>
-          <Link href="/auth-test" className="w-full">
-            <Button
-              className="w-full h-28 flex items-center justify-center gap-4 text-xl shadow-lg hover:shadow-xl transition-shadow"
-              variant="outline"
-            >
-              <RiSupabaseFill className="w-8 h-8" />
-              <span>Clerk + Supabase 인증 연동</span>
-            </Button>
-          </Link>
+          <p className="text-sm text-white/60">
+            Scan QR code at pop-up store or start online
+          </p>
+        </div>
+
+        {/* 예시 */}
+        <div className="mt-8 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm w-full">
+          <p className="text-sm text-white/70 mb-3">Example:</p>
+          <div className="flex items-center justify-center gap-3 text-lg">
+            <span className="text-white/60">Marchella</span>
+            <span className="text-white/40">→</span>
+            <span className="font-bold text-pink-400">채원</span>
+            <span className="text-white/60 text-sm">(Elegant & Refined)</span>
+          </div>
         </div>
       </section>
     </main>

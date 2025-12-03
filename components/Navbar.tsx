@@ -1,31 +1,16 @@
 "use client";
 
-import { SignedOut, SignInButton, SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
-import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
-  const { isSignedIn } = useUser();
-
   return (
-    <header className="flex justify-between items-center p-4 gap-4 h-16 max-w-7xl mx-auto">
-      <Link href="/" className="text-2xl font-bold">
-        SaaS Template
+    <header className="flex justify-between items-center p-4 gap-4 h-16 max-w-7xl mx-auto border-b border-white/10">
+      <Link href="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        My Korean Name
       </Link>
-      <div className="flex gap-4 items-center">
-        {!isSignedIn && (
-          <SignedOut>
-            <SignInButton mode="modal" fallbackRedirectUrl="/">
-              <Button>로그인</Button>
-            </SignInButton>
-          </SignedOut>
-        )}
-        {isSignedIn && (
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        )}
+      <div className="text-sm text-white/70">
+        #MyKoreanName
       </div>
     </header>
   );
