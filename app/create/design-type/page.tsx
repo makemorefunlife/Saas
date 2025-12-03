@@ -47,8 +47,10 @@ export default function DesignTypePage() {
 
   const handleContinue = () => {
     if (selectedType) {
+      const meaning = searchParams.get("meaning") || "";
+      const type = searchParams.get("type") || "";
       router.push(
-        `/create/result?name=${encodeURIComponent(name)}&option=${optionId}&koreanName=${encodeURIComponent(koreanName)}&designType=${selectedType}`
+        `/create/result?name=${encodeURIComponent(name)}&option=${optionId}&koreanName=${encodeURIComponent(koreanName)}&meaning=${encodeURIComponent(meaning)}&type=${encodeURIComponent(type)}&designType=${selectedType}`
       );
     }
   };

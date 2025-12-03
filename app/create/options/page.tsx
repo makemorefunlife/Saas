@@ -4,35 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Check } from "lucide-react";
-
-// 임시 데이터 (나중에 AI로 생성)
-const generateOptions = (name: string, keyword: string) => {
-  const nameLower = name.toLowerCase();
-  
-  return [
-    {
-      id: "a",
-      type: "Hanja (Traditional)",
-      koreanName: "마채라",
-      meaning: "Polished silk - refined and elegant",
-      description: "Based on sound similarity with deep traditional meaning",
-    },
-    {
-      id: "b",
-      type: "Trendy (Modern)",
-      koreanName: "채원",
-      meaning: "Elegant and refined",
-      description: "Contemporary Korean name style",
-    },
-    {
-      id: "c",
-      type: "Pure Korean",
-      koreanName: "마루",
-      meaning: "Summit, peak",
-      description: "Pure Korean word with natural imagery",
-    },
-  ];
-};
+import { generateKoreanNameOptions } from "@/lib/korean-name-generator";
 
 export default function OptionsPage() {
   const router = useRouter();
@@ -47,8 +19,10 @@ export default function OptionsPage() {
   useEffect(() => {
     // 로딩 애니메이션 (10-15초)
     const timer = setTimeout(() => {
-      const generatedOptions = generateOptions(name, keyword);
-      setOptions(generatedOptions);
+      if (name && keyword) {
+        const generatedOptions = generateKoreanNameOptions(name, keyword);
+        setOptions(generatedOptions);
+      }
       setIsLoading(false);
     }, 2000); // 개발용으로 2초, 실제로는 10-15초
 
@@ -61,10 +35,12 @@ export default function OptionsPage() {
 
   const handleContinue = () => {
     if (selectedOption) {
-      const selectedName = options.find((opt) => opt.id === selectedOption)?.koreanName || "";
-      router.push(
-        `/create/design-type?name=${encodeURIComponent(name)}&option=${selectedOption}&koreanName=${encodeURIComponent(selectedName)}`
-      );
+      const selected = options.find((opt) => opt.id === selectedOption);
+      if (selected) {
+        router.push(
+          `/create/design-type?name=${encodeURIComponent(name)}&option=${selectedOption}&koreanName=${encodeURIComponent(selected.koreanName)}&meaning=${encodeURIComponent(selected.meaning)}&type=${encodeURIComponent(selected.type)}`
+        );
+      }
     }
   };
 

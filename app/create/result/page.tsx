@@ -4,27 +4,17 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Download, Share2, Palette, Sticker, Image as ImageIcon } from "lucide-react";
 
-// 임시 결과 데이터
-const getResult = (name: string, optionId: string) => {
-  const results: Record<string, any> = {
-    a: {
-      koreanName: "마채라",
-      meaning: "Polished silk - refined and elegant",
-      type: "Hanja (Traditional)",
-    },
-    b: {
-      koreanName: "채원",
-      meaning: "Elegant and refined",
-      type: "Trendy (Modern)",
-    },
-    c: {
-      koreanName: "마루",
-      meaning: "Summit, peak",
-      type: "Pure Korean",
-    },
+// 결과 데이터 (URL 파라미터에서 가져옴)
+const getResult = (
+  koreanName: string,
+  meaning: string,
+  type: string
+) => {
+  return {
+    koreanName: koreanName || "채원",
+    meaning: meaning || "Elegant and refined",
+    type: type || "Trendy (Modern)",
   };
-
-  return results[optionId] || results.b;
 };
 
 const getDesignTypeInfo = (designType: string) => {
@@ -52,12 +42,12 @@ const getDesignTypeInfo = (designType: string) => {
 export default function ResultPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
-  const optionId = searchParams.get("option") || "b";
   const koreanName = searchParams.get("koreanName") || "";
+  const meaning = searchParams.get("meaning") || "";
+  const type = searchParams.get("type") || "";
   const designType = searchParams.get("designType") || "tattoo";
   
-  const result = getResult(name, optionId);
-  const finalKoreanName = koreanName || result.koreanName;
+  const result = getResult(koreanName, meaning, type);
   const designInfo = getDesignTypeInfo(designType);
   const DesignIcon = designInfo.icon;
 
@@ -77,7 +67,7 @@ export default function ResultPage() {
 
           <div className="bg-white/5 border border-white/20 rounded-lg p-8 backdrop-blur-sm">
             <div className="text-6xl md:text-7xl font-bold text-white mb-4">
-              {finalKoreanName}
+              {result.koreanName}
             </div>
             <p className="text-xl text-white/90 mb-2">{result.meaning}</p>
             <p className="text-sm text-white/60 mb-4">{result.type}</p>
@@ -105,7 +95,7 @@ export default function ResultPage() {
         </div>
 
         <div className="mt-8 text-sm text-white/60">
-          <p>#{finalKoreanName} #MyKoreanName #{designType}</p>
+          <p>#{result.koreanName} #MyKoreanName #{designType}</p>
         </div>
       </div>
     </main>
