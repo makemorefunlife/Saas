@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import CartIcon from "@/components/CartIcon";
 
 const Navbar = () => {
   return (
@@ -15,6 +16,9 @@ const Navbar = () => {
         <div className="hidden md:block text-sm text-white/70">
           #MyKoreanName
         </div>
+        <SignedIn>
+          <CartIcon />
+        </SignedIn>
         <SignedOut>
           <SignInButton 
             mode="modal"
